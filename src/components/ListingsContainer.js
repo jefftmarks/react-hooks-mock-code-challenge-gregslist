@@ -1,11 +1,23 @@
 import React from "react";
-// import ListingCard from "./ListingCard";
+import ListingCard from "./ListingCard";
+import Form from "./Form";
 
-function ListingsContainer() {
+function ListingsContainer({ listings, onDeleteListing, onSortListings, sortIsOn, onAddItem }) {
   return (
     <main>
+      <label htmlFor="sort">Sort by Location </label>
+      <input
+        id="sort"
+        name="sort"
+        value={sortIsOn}
+        type="checkbox"
+        onChange={(event) => onSortListings(event.target.checked)}
+      />
+      <Form onAddItem={onAddItem} />
       <ul className="cards">
-        {/* use the ListingCard component to display listings */}
+        {listings.map(listing => (
+          <ListingCard key={listing.id} listing={listing} onDeleteListing={onDeleteListing} />
+        ))}
       </ul>
     </main>
   );
